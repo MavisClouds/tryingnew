@@ -28,7 +28,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
     homepage,
     Text(
@@ -50,56 +50,43 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: FloatingSearchBar.builder(
-          itemCount: 100,
-          itemBuilder: (BuildContext context, int index) {
-            return Scaffold(
-                body: Align(
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    children: <Widget>[
-                      _widgetOptions.elementAt(_selectedIndex),
-                      RaisedButton(
-                          child: Text('Open route'),
-                          onPressed: () {
+        home: Scaffold(
+          appBar: AppBar(actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: (){})],),
+          body: Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+              _widgetOptions.elementAt(_selectedIndex),
+              RaisedButton(
+                  child: Text('Open route'),
+                  onPressed: () {
 //Navigator.push(context,MaterialPageRoute(builder: (context) => FirstRoute()) );
 // Navigate to second route when tapped.
-                          })
-                    ],
-                  ),
-                ),
-                bottomNavigationBar: BottomNavigationBar(
-                  items: const <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      title: Text('Home'),
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.business),
-                      title: Text('Business'),
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.school),
-                      title: Text('School'),
-                    ),
-                  ],
-                  currentIndex: _selectedIndex,
-                  selectedItemColor: Colors.amber[800],
-                  onTap: _onItemTapped,
-                ));
-          },
-          trailing: CircleAvatar(
-            child: Text("RD"),
+                  }),
+              ],
+            ),
           ),
-          drawer: Drawer(
-            child: Container(),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Home'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.business),
+                title: Text('Business'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.school),
+                title: Text('School'),
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.amber[800],
+            onTap: _onItemTapped,
           ),
-          onChanged: (String value) {},
-          onTap: () {},
-          decoration: InputDecoration.collapsed(
-            hintText: "Search...",
-          ),
-        ),);
+        ));
   }
 }
 
